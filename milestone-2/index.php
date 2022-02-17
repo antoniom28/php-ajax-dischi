@@ -11,6 +11,20 @@
     <div id="app">
         <header class="container">
             <img class="logo" src="img/logo.png" alt="" />
+            <div class="filter-box">
+            <span>Filtra per generi : </span>
+            <select 
+                name="" 
+                id="filter-select"
+                v-model="selectValue"
+                @change="filtraDischi()"
+            >
+                <option value=""></option>
+                <option v-for="(opt,index) in filterGenre" :value=opt.genre>
+                    {{opt.genre}}
+                </option>
+            </select>
+            </div>
         </header>
 
         <main class="container">

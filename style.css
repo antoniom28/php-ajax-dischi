@@ -22,6 +22,8 @@ body {
 }
 
 header.container {
+  color: white;
+  padding: 2px 25px;
   background-color: #2e3a46;
   display: flex;
   justify-content: space-between;
@@ -30,7 +32,14 @@ header.container {
 
 img.logo {
   width: 50px;
-  margin: 5px 15px;
+  margin: 5px 0px;
+}
+
+select{
+  width: 140px;
+  background-color: #1e2d3b;
+  color: white;
+  padding: 0 5px;
 }
 
 main.container {

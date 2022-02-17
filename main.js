@@ -1,37 +1,36 @@
 var App = new Vue({
     el: "#app",
     data: {
-        apiUrl : "urlDisc.php",
         dischiArray: [],
+        filterGenre: [],
+        selectValue: null,
         loading: true,
         inputOption: "",
-        inputType: "",
     },
     created: function () {
       this.getDischi();
+      this.getGenre();
     },
     methods:{
-        getDischi() {
-            axios
-                .get(this.apiUrl)
-                .then((dischi) => {
-                this.dischiArray = dischi.data;
-                setTimeout(() => {
-                    this.loading = false;
-                }, 1200);
-                })
-                .catch(function (error) {
-                console.log(error);
-                });
-            },
+        filtraDischi() {
+          this.inputOption = this.selectValue;
+        },
+        async getDischi() {
+          let response = await this.makeAxiosCall("urlDisc.php");
+          this.dischiArray = response.data;
+        },
+        async getGenre() {
+          let response = await this.makeAxiosCall("../genreList.php");
+          this.filterGenre = response.data;
+        },
+        makeAxiosCall(url) {
+          return axios.get(url);
+        },
     },
     computed: {
         dischiFiltrati() {
           return this.dischiArray.filter((disc) => {
-            if(this.inputType == 'genere')
               return disc.genre.includes(this.inputOption);
-            else
-              return disc.author.includes(this.inputOption);
           });
         },
       },
